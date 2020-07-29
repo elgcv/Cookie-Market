@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}All Cookies{% endblock %}
+
+
+{% block body %}
+
+    <div>
+        <div>
+            <h1 class="mt-5 mb-5 d-flex justify-content-center">Cookies</h1>
+        </div>
+        <div class="container mt-5 mb-5">
+            <div class="row d-flex justify-content-around shadow">
+                {% for products in product %}
+                    <div class="card col-4 m-4 p-0 shadow">
+                        <img src="{{ products.picture }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ products.name }}</h5>
+                            <p class="card-text">{{ products.type }} {{ products.price }} € </p>
+
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
