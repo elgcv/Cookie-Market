@@ -18,6 +18,14 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ products.name }}</h5>
                             <p class="card-text">{{ products.type }} {{ products.price }} € </p>
+                            {% if app.user %}
+                                <div class="like-btn">
+                                    <a href="#" id="cookielist-{{products.id}}" class="cookielist {{ app.user.isInCookielist(product) ? 'active' : '' }}"
+                                       data-href={{path('product_cookielist', {'id': products.id})}}>
+                                        <i class="fa-heart fas ml-2" ></i>
+                                    </a>
+                                </div>
+                            {% endif %}
 
                         </div>
                     </div>

@@ -27,3 +27,12 @@ strong {
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
+.like-btn{
+    a{
+        color: black;
+    }
+    a.active{
+        color: $danger;
+    }
+}
