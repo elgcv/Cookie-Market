@@ -89,9 +89,6 @@ class ProductController extends AbstractController
 
     /**
      * @Route("/{id}", name="product_delete", methods={"DELETE"})
-     * @param Request $request
-     * @param Product $product
-     * @return Response
      */
     public function delete(Request $request, Product $product): Response
     {

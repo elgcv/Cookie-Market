@@ -25,7 +25,6 @@ class ProductType extends AbstractType
             ->add('price', TextType::class, [
                 'label' => 'Price',
             ])
-            ->add('user')
         ;
     }
 
