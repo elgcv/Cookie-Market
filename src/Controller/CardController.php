@@ -4,57 +4,35 @@
 namespace App\Controller;
 
 
-use App\Repository\ProductRepository;
+use App\Service\Card\CardService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CardController extends AbstractController
 {
     /**
      * @Route("/list", name="card_index")
-     * @param SessionInterface $session
-     * @param ProductRepository $productRepository
+     * @param CardService $cardService
      * @return Response
      */
-    public function index(SessionInterface $session, ProductRepository $productRepository):Response
+    public function index(CardService $cardService):Response
     {
-        $list = $session->get('list',[]);
-
-        $listWithData = [];
-        foreach ($list as $id => $quantity){
-            $listWithData[] = [
-               'product'=> $productRepository->find($id),
-               'quantity'=> $quantity,
-            ];
-        }
-
-
         return $this->render('card/index.html.twig', [
-            'items' => $listWithData,
+            'items' => $cardService->getAllCard(),
         ]);
     }
 
     /**
      * @Route("/list/add/{id}", name="card_add")
      * @param $id
-     * @param SessionInterface $session
+     * @param CardService $cardService
+     * @return RedirectResponse
      */
-    public function add($id, SessionInterface $session)
+    public function add($id, CardService $cardService)
     {
-
-        $list = $session->get('list', []);
-
-        if(!empty($list[$id])) {
-            $list[$id]++;
-        }else {
-            $list[$id] = 1;
-        }
-
-        $session->set('list', $list);
+        $cardService->add($id);
 
         return $this->redirectToRoute('card_index');
 
@@ -63,16 +41,12 @@ class CardController extends AbstractController
     /**
      * @Route("/list/delete/{id}", name="card_delete")
      * @param $id
-     * @param SessionInterface $session
+     * @param CardService $cardService
      * @return Response
      */
-    public function delete($id, SessionInterface $session):Response
-    {   $list = $session->get('list', []);
-
-        if (!empty($list[$id])){
-            unset($list[$id]);
-        }
-        $session->set('list', $list);
+    public function delete($id,CardService $cardService):Response
+    {
+        $cardService->delete($id);
 
         return $this->redirectToRoute('card_index');
 
