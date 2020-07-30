@@ -49,10 +49,11 @@ class CardService
         $listWithData = [];
         foreach ($list as $id => $quantity){
             $listWithData[] = [
-                'product'=> $this->productRepository->find($id),
+                'product'=> $this->productRepository->findOneById($id),
                 'quantity'=> $quantity,
             ];
         }
+
         return $listWithData;
 
     }

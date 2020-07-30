@@ -18,13 +18,13 @@
             </tr>
             </thead>
             <tbody>
+
             {% for item in items  %}
                 <tr>
                     <td>{{ item.product.name }}</td>
                     <td>{{ item.product.price }}</td>
                     <td>{{ item.product.type }}</td>
                     <td>{{ item.quantity }}</td>
-
                     <td>
                         <a href="{{ path('card_delete', {'id': item.product.id}) }}" class="btn btn-danger btn-sm">Delete</a>
 

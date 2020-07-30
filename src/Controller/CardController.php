@@ -19,6 +19,7 @@ class CardController extends AbstractController
      */
     public function index(CardService $cardService):Response
     {
+
         return $this->render('card/index.html.twig', [
             'items' => $cardService->getAllCard(),
         ]);

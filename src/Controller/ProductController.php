@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +43,7 @@ class ProductController extends AbstractController
             $entityManager->persist($product);
             $entityManager->flush();
 
-            return $this->redirectToRoute('product_index');
+            return $this->redirectToRoute('market_index');
         }
 
         return $this->render('product/new.html.twig', [
@@ -103,29 +102,6 @@ class ProductController extends AbstractController
         }
 
         return $this->redirectToRoute('product_index');
-    }
-
-    /**
-     * @Route("/{id}/watchlist", name="product_watchlist", methods={"GET","POST"})
-     * @param Request $request
-     * @param Product $product
-     * @param EntityManagerInterface $entityManager
-     * @return Response
-     */
-    public function addToWatchlist(Request $request, Product $product, EntityManagerInterface $entityManager): Response
-    {
-        $user = $this->getUser();
-        if ($user->isInWatchlist($product)) {
-            $user->removeProgram($product);
-        } else {
-            $user->addProgram($product);
-        }
-        $entityManager->flush();
-
-        return $this->json([
-            'isInWatchlist' => $user->isInWatchlist($product)
-        ]);
-
     }
 
 
