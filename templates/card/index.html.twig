@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="bg-light p-3">
+    <h1> Your Shopping list</h1>
+</div>
+
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items  %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.product.price }}</td>
+                    <td>{{ item.product.type }}</td>
+                    <td>{{ item.quantity }}</td>
+
+                    <td>
+                        <a href="{{ path('card_delete', {'id': item.product.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3"> Total : </td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+
+        {% else %}
+            <p> Oops, seems like it's empty !</p>
+    {% endif %}
+
+
+{% endblock %}

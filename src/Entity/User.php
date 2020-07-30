@@ -151,8 +151,5 @@ class User implements UserInterface
 
         return $this;
     }
-    public function isInCookielist(Product $product): bool
-    {
-        return $this->products->contains($product);
-    }
+
 }

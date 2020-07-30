@@ -25,7 +25,7 @@ class MarketController extends AbstractController
         $product = $productRepository->findAll();
 
 
-        return $this->render('index.html.twig',[
+        return $this->render('home.html.twig',[
             'product' => $product
             ]);
     }
